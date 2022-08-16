@@ -1,0 +1,90 @@
+from calibre.web.feeds.news import BasicNewsRecipe
+
+_name = "Indian Express"
+
+def classes(classes):
+    q = frozenset(classes.split(' '))
+    return dict(attrs={
+        'class': lambda x: x and frozenset(x.split()).intersection(q)})
+
+
+class IndianExpress(BasicNewsRecipe):
+    title = u'Indian Express'
+    language = 'en_IN'
+    __author__ = 'Krittika Goyal'
+    oldest_article = 1.15  # days
+    max_articles_per_feed = 25
+    encoding = 'utf-8'
+    masthead_url = 'https://indianexpress.com/wp-content/themes/indianexpress/images/indian-express-logo-n.svg'
+    compress_news_images = True
+    compress_news_images_auto_size = 10
+    scale_news_images = (800, 800)
+    no_stylesheets = True
+    use_embedded_content = False
+    remove_attributes = ['style','height','width']
+    ignore_duplicate_articles = {'url'}
+    extra_css = '''
+        #storycenterbyline {font-size:small;}
+        #img-cap {font-size:small;}    
+    '''
+    resolve_internal_links = True
+    remove_empty_feeds = True
+    
+    keep_only_tags = [
+        classes('heading-part full-details')
+    ]
+    remove_tags = [
+        dict(name='div', attrs={'id':'ie_story_comments'}),
+        dict(name='img', attrs={'src':'https://images.indianexpress.com/2021/06/explained-button-300-ie.jpeg'}),
+        dict(name='a', attrs={'href':'https://indianexpress.com/section/explained/?utm_source=newbanner'}),
+        dict(name='img', attrs={'src':'https://images.indianexpress.com/2021/06/opinion-button-300-ie.jpeg'}),
+        dict(name='a', attrs={'href':'https://indianexpress.com/section/opinion/?utm_source=newbanner'}),
+        classes(
+            'share-social appstext ie-int-campign-ad ie-breadcrumb custom_read_button unitimg copyright'
+            ' storytags pdsc-related-modify news-guard premium-story append_social_share'
+            ' digital-subscriber-only h-text-widget'
+        )
+    ]
+    
+    feeds = [
+        ('Front Page', 'https://indianexpress.com/print/front-page/feed/'),
+        ('India', 'https://indianexpress.com/section/india/feed/'),
+        ('Express Network', 'https://indianexpress.com/print/express-network/feed/'),
+        ('Delhi Confidential', 'https://indianexpress.com/section/delhi-confidential/feed/'),
+        ('Op-Ed', 'http://indianexpress.com/section/opinion/feed/'),
+        ('Explained', 'https://indianexpress.com/section/explained/feed/'),
+        ('UPSC-CSE Key','https://indianexpress.com/section/upsc-current-affairs/feed/'),
+        ('Research', 'https://indianexpress.com/section/research/feed/'),
+        ('Economy', 'https://indianexpress.com/print/economy/feed/'),
+        ('Business', 'https://indianexpress.com/section/business/feed/'),
+        ('World', 'https://indianexpress.com/section/world/feed/'),
+        ('Movie Reviews', 'https://indianexpress.com/section/entertainment/movie-review/feed/'),
+        ('Sunday Eye', 'https://indianexpress.com/print/eye/feed/'),
+        #('Science & Technology', 'http://indianexpress.com/section/technology/feed/'),
+        #('Political Pulse', 'https://indianexpress.com/section/political-pulse/feed'),
+        #('Education', 'https://indianexpress.com/section/education/feed/'),
+        # Want to add more? go-to:https://indianexpress.com/syndication/
+    ]
+
+    def get_cover_url(self):
+        soup = self.index_to_soup('https://www.magzter.com/IN/The-Indian-Express-Ltd./The-Indian-Express-Mumbai/Newspaper/')
+        for citem in soup.findAll('meta', content=lambda s: s and s.endswith('view/3.jpg')):
+            return citem['content']
+
+    def preprocess_html(self, soup):
+        h2 = soup.findAll('h2')
+        for sub in h2:
+            sub.name = 'h4'
+        for span in soup.findAll('span', attrs ={'class':['ie-custom-caption', 'custom-caption']}):
+            span['id'] = 'img-cap' 
+        for img in soup.findAll('img'):
+            noscript = img.findParent('noscript')
+            if noscript is not None:
+                lazy = noscript.findPreviousSibling('img')
+                if lazy is not None:
+                    lazy.extract()
+                noscript.name = 'div'
+        return soup
+
+
+calibre_most_common_ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.87 Safari/537.36'

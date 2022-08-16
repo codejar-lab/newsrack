@@ -307,3 +307,4 @@ recipes = [
         category="magazines",
     ),
 ]
+"""

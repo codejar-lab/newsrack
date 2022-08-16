@@ -1,6 +1,6 @@
 from typing import List
 
-from _recipe_utils import Recipe
+from _recipe_utils import Recipe, onlyon_days, onlyat_hours, onlyon_weekdays
 
 # Define your custom recipes list here
 recipes: List[Recipe] = [

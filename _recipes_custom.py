@@ -4,10 +4,11 @@ from _recipe_utils import Recipe
 
 # Define your custom recipes list here
 recipes: List[Recipe] = [
-    # Recipe(
-    #     recipe="example",
-    #     slug="example",
-    #     src_ext="epub",
-    #     category="example",
-    # ),
+    Recipe(
+        recipe="frontline",
+        slug="frontline",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="magazines",
+    ),
 ]

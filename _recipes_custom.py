@@ -11,4 +11,18 @@ recipes: List[Recipe] = [
         target_ext=["epub"],
         category="magazines",
     ),
+    Recipe(
+        recipe="outlook_india",
+        slug="outlook_india",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="magazines",
+    ),
+    Recipe(
+        recipe="india_today",
+        slug="india_today",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="magazines",
+    ),
 ]

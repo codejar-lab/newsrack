@@ -52,6 +52,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="news",
+    ),
     Recipe(
         recipe="gujarat-samachar",
         slug="gujarat-samachar",

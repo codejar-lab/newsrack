@@ -9,7 +9,7 @@ class Newsletters(BasicNewsRecipe):
     description = 'My Favourite Newsletters from Substack.'
     language = 'en_IN'
     __author__ = 'Arpan'
-    oldest_article = 15  # days
+    oldest_article = 7  # days
     max_articles_per_feed = 2
     encoding = 'utf-8'
     use_embedded_content = True

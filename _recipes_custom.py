@@ -10,6 +10,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="Indian magazines",
+        enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
         recipe="outlook_india",
@@ -17,6 +18,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="Indian magazines",
+        enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
         recipe="india_today",
@@ -24,48 +26,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="Indian magazines",
-    ),
-    Recipe(
-        recipe="the-hindu",
-        slug="the-hindu",
-        src_ext="mobi",
-        target_ext=["epub"],
-        category="news",
-    ),
-    Recipe(
-        recipe="indian-express",
-        slug="indian-express",
-        src_ext="mobi",
-        target_ext=["epub"],
-        category="news",
-    ),
-    Recipe(
-        recipe="live-mint",
-        slug="live-mint",
-        src_ext="mobi",
-        target_ext=["epub"],
-        category="news",
-    ),
-    Recipe(
-        recipe="business-standard",
-        slug="business-standard",
-        src_ext="mobi",
-        target_ext=["epub"],
-        category="news",
-    ),
-    Recipe(
-        recipe="gujarat-samachar",
-        slug="gujarat-samachar",
-        src_ext="mobi",
-        target_ext=["epub"],
-        category="Gujarati Newspaper",
-    ),
-    Recipe(
-        recipe="sandesh",
-        slug="sandesh",
-        src_ext="mobi",
-        target_ext=["epub"],
-        category="Gujarati Newspaper",
+        enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
         recipe="dte",
@@ -75,8 +36,7 @@ recipes: List[Recipe] = [
         category="Indian Magazines",
         enable_on=onlyon_days(list(range(15, 31)), -5),  # middle of the month?
     ),
-
-        Recipe(
+    Recipe(
         recipe="open",
         slug="open",
         src_ext="mobi",
@@ -84,6 +44,56 @@ recipes: List[Recipe] = [
         timeout=180,
         overwrite_cover=True,
         category="Indian Magazines",
+        enable_on=onlyon_days(list(range(15, 31)), -5),
+    ),
+
+    Recipe(
+        recipe="the-hindu",
+        slug="the-hindu",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="news",
+        enable_on=onlyat_hours(list(range(6, 9)), +5),  # from 6am-11.59am daily, for the timezone UTC-5
+    ),
+    Recipe(
+        recipe="indian-express",
+        slug="indian-express",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="news",
+        enable_on=onlyat_hours(list(range(6, 9)), +5),
+    ),
+    Recipe(
+        recipe="live-mint",
+        slug="live-mint",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="news",
+        enable_on=onlyat_hours(list(range(6, 9)), +5),
+    ),
+    Recipe(
+        recipe="business-standard",
+        slug="business-standard",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="news",
+        enable_on=onlyat_hours(list(range(6, 9)), +5),
+    ),
+    Recipe(
+        recipe="gujarat-samachar",
+        slug="gujarat-samachar",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="Gujarati Newspaper",
+        enable_on=onlyat_hours(list(range(6, 9)), +5),
+    ),
+    Recipe(
+        recipe="sandesh",
+        slug="sandesh",
+        src_ext="mobi",
+        target_ext=["epub"],
+        category="Gujarati Newspaper",
+        enable_on=onlyat_hours(list(range(6, 9)), +5),
     ),
     Recipe(
         recipe="finshots",
@@ -98,6 +108,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="Indian Magazines",
+        enable_on=onlyon_days(list(range(15, 31)), -5),
     ),
     Recipe(
         recipe="caravan_magazine",
@@ -105,6 +116,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="Indian Magazines",
+        enable_on=onlyon_days(list(range(15, 31)), -5),
     ),
     Recipe(
         recipe="live-law",
@@ -133,6 +145,7 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="Indian magazines",
+        enable_on=onlyon_days(list(range(15, 31)), -5),
     ),
     Recipe(
         recipe="atlantic-magazine",
@@ -161,6 +174,7 @@ recipes: List[Recipe] = [
         overwrite_cover=False,
         category="International magazines",
         timeout=240,
+        enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
         recipe="hbr",
@@ -204,6 +218,7 @@ recipes: List[Recipe] = [
         target_ext=["epub"],
         overwrite_cover=True,
         category="International magazines",
+        enable_on=onlyon_weekdays([3, 4, 5, 6], -4),
     ),
     Recipe(
         recipe="time-magazine",
@@ -220,5 +235,6 @@ recipes: List[Recipe] = [
         src_ext="mobi",
         target_ext=["epub"],
         category="International magazines",
+        enable_on=onlyon_weekdays([3, 4, 5, 6], -4),
     ),
 ]

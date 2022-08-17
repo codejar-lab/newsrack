@@ -9,7 +9,7 @@ recipes: List[Recipe] = [
         slug="frontline",
         src_ext="mobi",
         target_ext=["epub"],
-        category="Indian magazines",
+        category="Indian Magazines",
         enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
@@ -17,7 +17,7 @@ recipes: List[Recipe] = [
         slug="outlook_india",
         src_ext="mobi",
         target_ext=["epub"],
-        category="Indian magazines",
+        category="Indian Magazines",
         enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
@@ -25,7 +25,7 @@ recipes: List[Recipe] = [
         slug="india_today",
         src_ext="mobi",
         target_ext=["epub"],
-        category="Indian magazines",
+        category="Indian Magazines",
         enable_on=onlyon_days([1, 14]),  # only on days 1, 14 of each month
     ),
     Recipe(
@@ -137,14 +137,14 @@ recipes: List[Recipe] = [
         slug="daily-current",
         src_ext="mobi",
         target_ext=["epub"],
-        category="UPSC",
+        category="!UPSC",
     ),
     Recipe(
         recipe="swarajya",
         slug="swarajya",
         src_ext="mobi",
         target_ext=["epub"],
-        category="Indian magazines",
+        category="Indian Magazines",
         enable_on=onlyon_days(list(range(15, 31)), -5),
     ),
     Recipe(
